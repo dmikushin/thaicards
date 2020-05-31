@@ -15,6 +15,7 @@ my($json_text) = do {
     <$json_fh>
 };
 
+my($content_template) = join("", `cat content.tex.in`);
 my($card_template) = join("", `cat thaicard.tex.in`);
 
 my($json) = JSON->new;
@@ -30,16 +31,33 @@ for ( @{$cards->{cards}} ) {
     # Parsing accents to colorize them.
     $russian =~ s/'(\w)/\\textcolor{red}{\\'$1}/g;
 
+    my($content) = $content_template;
+    $content =~ s/#RUSSIAN#/$russian/;
+    $content =~ s/#TRANSCRIPT#/$transcript/;
+    $content =~ s/#THAI#/$thai/;
+
+    my($content_filename) = sprintf("content_%003d", $index);
+    open my $fh1, ">", "$content_filename.tex" or die("Could not open file. $!");
+    print $fh1 $content;
+    close $fh1;
+
+    system("xelatex $content_filename.tex");
+    system("xelatex $content_filename.tex");
+    system("rm $content_filename.tex");
+    system("rm $content_filename.aux");
+    system("rm $content_filename.log");
+    system("rm $content_filename.out");
+    system("pdfcrop $content_filename.pdf");
+    system("rm $content_filename.pdf");
+
     my($card) = $card_template;
     $card =~ s/#TOPIC#/$topic/;
-    $card =~ s/#RUSSIAN#/$russian/;
-    $card =~ s/#TRANSCRIPT#/$transcript/;
-    $card =~ s/#THAI#/$thai/;
+    $card =~ s/#CONTENT#/$content_filename-crop.pdf/;
 
     my($card_filename) = sprintf("thaicard_%003d", $index);
-    open my $fh, ">", "$card_filename.tex" or die("Could not open file. $!");
-    print $fh $card;
-    close $fh;
+    open my $fh2, ">", "$card_filename.tex" or die("Could not open file. $!");
+    print $fh2 $card;
+    close $fh2;
 
     system("xelatex $card_filename.tex");
     system("xelatex $card_filename.tex");
@@ -47,6 +65,9 @@ for ( @{$cards->{cards}} ) {
     system("rm $card_filename.aux");
     system("rm $card_filename.log"); 
     system("rm $card_filename.out");
+    system("rm $content_filename-crop.pdf");
+
+    system("convert -quality 00 $card_filename.pdf $card_filename.png");
 
     $index++; 
 }

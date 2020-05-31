@@ -1,0 +1,36 @@
+\documentclass[]{extarticle}
+\usepackage{xcolor}
+\usepackage[paperheight=30in,paperwidth=15in,margin=0.5in]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage{thai}
+\setotherlanguages{english,russian}
+\newfontfamily\cyrillicfont{Tahoma Bold}[Script=Cyrillic]
+\newfontfamily\thaifont{Sathu}[Script=Thai,Scale=MatchLowercase,WordSpace=1.25,Mapping=tex-text]
+\usepackage{xunicode}
+\usepackage{xltxtra}
+\pagestyle{empty}
+\begin{document}
+\nopagecolor
+\hspace{0pt}
+\vfill
+\begin{center}
+%
+% Russian word
+%
+\resizebox*{\textwidth}{!}{\textrussian{\textbf{#RUSSIAN#}}}
+\vskip0.7in
+%
+% Thai transcription
+%
+\resizebox*{\textwidth}{!}{#TRANSCRIPT#}
+\vskip0.7in
+%
+% Thai word
+%
+\resizebox*{\textwidth}{!}{\textbf{#THAI#}}
+\end{center}
+\vfill
+\hspace{0pt}
+\pagebreak
+\end{document}

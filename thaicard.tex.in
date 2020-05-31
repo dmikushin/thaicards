@@ -68,26 +68,6 @@
 \node[inner sep=0,yshift=-0.5in,anchor=north] at (current page.north)
 {\resizebox*{\textwidth}{!}{\shadowfy{#TOPIC#}}};
 \end{tikzpicture}
-\begin{center}
-\hspace{0pt}
-\vfill
-%
-% Russian word
-%
-\resizebox*{\textwidth}{!}{\textrussian{\textbf{#RUSSIAN#}}}
-\vskip0.7in
-%
-% Thai transcription
-%
-\resizebox*{\textwidth}{!}{#TRANSCRIPT#}
-\vskip0.7in
-%
-% Thai word
-%
-\resizebox*{\textwidth}{!}{\textbf{#THAI#}}
-\end{center}
-\vfill
-\hspace{0pt}
 %
 % Footer links
 %
@@ -100,6 +80,13 @@
 {\footerfont{\href{facebook.com/russianforthaisbyjibby}{facebook.com/russianforthaisbyjibby}}};
 \node[inner sep=36pt,yshift=-7.1in,anchor=west] at (current page.center)
 {\footerfont{\href{instagram.com/russianforthaisbyjibby}{instagram.com/russianforthaisbyjibby}}};
+\end{tikzpicture}
+%
+% Content
+%
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0] at (current page.center)
+{\includegraphics[width=0.9\paperwidth,height=0.8\paperheight,keepaspectratio]{#CONTENT#}};
 \end{tikzpicture}
 \pagebreak
 \end{document}
