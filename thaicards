@@ -27,19 +27,27 @@ for ( @{$cards->{cards}} ) {
     my($transcript) = $_->{transcript};
     my($thai) = $_->{thai};
 
+    # Parsing accents to colorize them.
+    $russian =~ s/'(\w)/\\textcolor{red}{\\'$1}/g;
+
     my($card) = $card_template;
     $card =~ s/#TOPIC#/$topic/;
     $card =~ s/#RUSSIAN#/$russian/;
     $card =~ s/#TRANSCRIPT#/$transcript/;
     $card =~ s/#THAI#/$thai/;
 
-    my($card_filename) = sprintf("thaicard_%003d.tex", $index);
-    open my $fh, ">", $card_filename or die("Could not open file. $!");
+    my($card_filename) = sprintf("thaicard_%003d", $index);
+    open my $fh, ">", "$card_filename.tex" or die("Could not open file. $!");
     print $fh $card;
     close $fh;
 
-    system("xelatex $card_filename");
-    system("xelatex $card_filename");
+    system("xelatex $card_filename.tex");
+    system("xelatex $card_filename.tex");
+    system("rm $card_filename.tex");
+    system("rm $card_filename.aux");
+    system("rm $card_filename.log"); 
+    system("rm $card_filename.out");
 
     $index++; 
 }
+
