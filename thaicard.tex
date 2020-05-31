@@ -59,17 +59,18 @@
 \node[inner sep=0] at (current page.center)
 {\includegraphics[width=\paperwidth,height=\paperheight]{thaicard.png}};
 \end{tikzpicture}
-\hspace{0pt}
 \def\primarycolor{orange!99}
 \def\secondarycolor{black}
 %
 % Header
 %
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0,yshift=-0.5in,anchor=north] at (current page.north)
+{\resizebox*{\textwidth}{!}{\shadowfy{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ “รูปลักษณ์”}}};
+\end{tikzpicture}
 \begin{center}
-\resizebox*{\textwidth}{!}{\shadowfy{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ “รูปลักษณ์”}}
-\end{center}
+\hspace{0pt}
 \vfill
-\begin{center}
 %
 % Russian word
 %
@@ -86,6 +87,7 @@
 \resizebox*{\textwidth}{!}{\textbf{(ประเภทของร่า)งกาย}}
 \end{center}
 \vfill
+\hspace{0pt}
 %
 % Footer links
 %
@@ -99,6 +101,5 @@
 \node[inner sep=36pt,yshift=-7.1in,anchor=west] at (current page.center)
 {\footerfont{\href{instagram.com/russianforthaisbyjibby}{instagram.com/russianforthaisbyjibby}}};
 \end{tikzpicture}
-\hspace{0pt}
 \pagebreak
 \end{document}
