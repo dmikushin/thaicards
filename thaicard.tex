@@ -68,26 +68,6 @@
 \node[inner sep=0,yshift=-0.5in,anchor=north] at (current page.north)
 {\resizebox*{\textwidth}{!}{\shadowfy{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ “รูปลักษณ์”}}};
 \end{tikzpicture}
-\begin{center}
-\hspace{0pt}
-\vfill
-%
-% Russian word
-%
-\resizebox*{\textwidth}{!}{\textrussian{\textbf{телослож\textcolor{red}{\'е}ние}}}
-\vskip0.7in
-%
-% Thai transcription
-%
-\resizebox*{\textwidth}{!}{[ประเ-ภทข-\textcolor{red}{องร่า}-งกาย]}
-\vskip0.7in
-%
-% Thai word
-%
-\resizebox*{\textwidth}{!}{\textbf{(ประเภทของร่า)งกาย}}
-\end{center}
-\vfill
-\hspace{0pt}
 %
 % Footer links
 %
@@ -100,6 +80,13 @@
 {\footerfont{\href{facebook.com/russianforthaisbyjibby}{facebook.com/russianforthaisbyjibby}}};
 \node[inner sep=36pt,yshift=-7.1in,anchor=west] at (current page.center)
 {\footerfont{\href{instagram.com/russianforthaisbyjibby}{instagram.com/russianforthaisbyjibby}}};
+\end{tikzpicture}
+%
+% Content
+%
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0] at (current page.center)
+{\includegraphics[width=0.9\paperwidth,height=0.8\paperheight,keepaspectratio]{content-crop.pdf}};
 \end{tikzpicture}
 \pagebreak
 \end{document}
