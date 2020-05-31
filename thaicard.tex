@@ -1,4 +1,43 @@
 \documentclass[]{extarticle}
+\usepackage{stackengine,xcolor}
+
+\newcommand\shadowfy[1]{\expandafter\shadowfypars#1\par\relax\relax}
+\long\def\shadowfypars#1\par#2\relax{%
+  \ifx#1\relax\else
+    \shadowfywords#1 \relax\relax%
+  \fi%
+  \ifx\relax#2\else\par\shadowfypars#2\relax\fi%
+}
+\def\shadowfywords#1 #2\relax{%
+  \ifx#1\relax\else
+    \shadowfyletters#1\relax\relax%
+  \fi%
+  \ifx\relax#2\else\ \shadowfywords#2\relax\fi%
+}
+\def\shadowfyletters#1#2\relax{%
+  \shadow{#1}%
+  \ifx\relax#2\else\shadowfyletters#2\relax\fi}
+
+\newlength\shadowHoffset
+\newlength\shadowVoffset
+\setlength\shadowHoffset{.2pt}
+\setlength\shadowVoffset{.1pt}
+\def\primarycolor{white}
+\def\secondarycolor{black}
+
+\def\shadow#1{\setstackgap{L}{0pt}\def\stacktype{L}%
+\def\useanchorwidth{T}% CAN BE COMMENTEDD FOR MORE INTERLETTER SPACE.
+\Longstack{%
+\raisebox{0pt}{\textcolor{\primarycolor}{#1}} 
+\kern.7\shadowHoffset\raisebox{.7\shadowVoffset}{\textcolor{\secondarycolor}{#1}}
+\kern-.7\shadowHoffset\raisebox{.7\shadowVoffset}{\textcolor{\secondarycolor}{#1}}
+\kern\shadowHoffset\raisebox{0pt}{\textcolor{\secondarycolor}{#1}}
+\kern-\shadowHoffset\raisebox{0pt}{\textcolor{\secondarycolor}{#1}}
+\kern.7\shadowHoffset\raisebox{-.7\shadowVoffset}{\textcolor{\secondarycolor}{#1}}
+\kern-.7\shadowHoffset\raisebox{-.7\shadowVoffset}{\textcolor{\secondarycolor}{#1}}
+\kern0pt\raisebox{\shadowVoffset}{\textcolor{\secondarycolor}{#1}}
+\kern0pt\raisebox{-\shadowVoffset}{\textcolor{\secondarycolor}{#1}}%
+}}
 \usepackage[paperheight=15in,paperwidth=15in,margin=0.5in]{geometry}
 \usepackage{tikz}
 \usepackage{fontspec}
@@ -18,7 +57,9 @@
 \node[inner sep=0] at (current page.center)
 {\includegraphics[width=\paperwidth,height=\paperheight]{thaicard.png}};
 \end{tikzpicture}
-\resizebox*{\textwidth}{!}{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ ``รูปลักษณ์''}
+\def\primarycolor{orange!70}
+\def\secondarycolor{black}
+\resizebox*{\textwidth}{!}{\shadowfy{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ “รูปลักษณ์”}}
 \hspace{0pt}
 \vfill
 \begin{center}
