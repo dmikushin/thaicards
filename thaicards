@@ -22,6 +22,15 @@ if (dirname(__FILE__) eq "/usr/bin")
 }
 
 my($filename) = 'thaicards.json';
+if (scalar(@ARGV) > 1)
+{
+	print "Usage: thaicards <json_filename>\n";
+	exit;
+}
+elsif (scalar(@ARGV) == 1)
+{
+	$filename = $ARGV[0];
+}
 
 my($json_text) = do {
     open(my $json_fh, "<:encoding(UTF-8)", $filename)
