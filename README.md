@@ -1,3 +1,5 @@
+Memory cards rendering system for Thai language learning.
+
 ## Prerequisites
 
 ```
