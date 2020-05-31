@@ -1,4 +1,5 @@
 \documentclass[]{extarticle}
+\usepackage[hidelinks]{hyperref}
 \usepackage{stackengine,xcolor}
 
 \newcommand\shadowfy[1]{\expandafter\shadowfypars#1\par\relax\relax}
@@ -38,38 +39,66 @@
 \kern0pt\raisebox{\shadowVoffset}{\textcolor{\secondarycolor}{#1}}
 \kern0pt\raisebox{-\shadowVoffset}{\textcolor{\secondarycolor}{#1}}%
 }}
-\usepackage[paperheight=15in,paperwidth=15in,margin=0.5in]{geometry}
+\usepackage[paperheight=15in,paperwidth=15in,left=0.5in,right=0.5in,top=0in,bottom=0in]{geometry}
 \usepackage{tikz}
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{thai}
 \setotherlanguages{english,russian}
-%\setdefaultlanguage{russian}
-%\setmainfont[Ligatures=TeX]{Times New Roman}
+\newfontfamily\footerfont[SizeFeatures={Size=30}]{Tahoma}
 \newfontfamily\cyrillicfont{Tahoma Bold}[Script=Cyrillic]
 \newfontfamily\thaifont{Sathu}[Script=Thai,Scale=MatchLowercase,WordSpace=1.25,Mapping=tex-text]
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \pagestyle{empty}
 \begin{document}
+%
+% Background
+%
 \begin{tikzpicture}[remember picture,overlay]
-% draw image
 \node[inner sep=0] at (current page.center)
 {\includegraphics[width=\paperwidth,height=\paperheight]{thaicard.png}};
 \end{tikzpicture}
-\def\primarycolor{orange!70}
-\def\secondarycolor{black}
-\resizebox*{\textwidth}{!}{\shadowfy{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ “รูปลักษณ์”}}
 \hspace{0pt}
+\def\primarycolor{orange!99}
+\def\secondarycolor{black}
+%
+% Header
+%
+\begin{center}
+\resizebox*{\textwidth}{!}{\shadowfy{คำศัพท์ วลี และประโยคต่างๆที่เกี่ยวกับ “รูปลักษณ์”}}
+\end{center}
 \vfill
 \begin{center}
+%
+% Russian word
+%
 \resizebox*{\textwidth}{!}{\textrussian{\textbf{телослож\textcolor{red}{\'е}ние}}}
 \vskip0.7in
+%
+% Thai transcription
+%
 \resizebox*{\textwidth}{!}{[ประเ-ภทข-\textcolor{red}{องร่า}-งกาย]}
 \vskip0.7in
+%
+% Thai word
+%
 \resizebox*{\textwidth}{!}{\textbf{(ประเภทของร่า)งกาย}}
 \end{center}
 \vfill
+%
+% Footer links
+%
+\begin{tikzpicture}[remember picture,overlay]
+\node[inner sep=0,yshift=-6.6in,anchor=west] at (current page.center)
+{\includegraphics[width=31pt]{facebook.png}};
+\node[inner sep=0,yshift=-7.1in,anchor=west] at (current page.center)
+{\includegraphics[width=31pt]{instagram.png}};
+\node[inner sep=36pt,yshift=-6.6in,anchor=west] at (current page.center)
+{\footerfont{\href{facebook.com/russianforthaisbyjibby}{facebook.com/russianforthaisbyjibby}}};
+\node[inner sep=36pt,yshift=-7.1in,anchor=west] at (current page.center)
+{\footerfont{\href{instagram.com/russianforthaisbyjibby}{instagram.com/russianforthaisbyjibby}}};
+\end{tikzpicture}
 \hspace{0pt}
 \pagebreak
 \end{document}
