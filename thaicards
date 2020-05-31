@@ -5,6 +5,21 @@ use warnings;
 use lib qw(..);
 
 use JSON qw( );
+use File::Basename;
+
+# Check whether we run in the development mode (current directory),
+# or in production mode (all file I/O in /tmp folder).
+my($tmp) = ".";
+my($templatedir) = ".";
+my($imgdir) = ".";
+my($fontdir) = "./fonts";
+if (dirname(__FILE__) eq "/usr/bin")
+{
+    $tmp = "/tmp";
+    $templatedir = "/usr/share/thaicards";
+    $imgdir = $templatedir;
+    $fontdir = "$templatedir/fonts";
+}
 
 my($filename) = 'thaicards.json';
 
@@ -15,8 +30,8 @@ my($json_text) = do {
     <$json_fh>
 };
 
-my($content_template) = join("", `cat content.tex.in`);
-my($card_template) = join("", `cat thaicard.tex.in`);
+my($content_template) = join("", `cat $templatedir/content.tex.in`);
+my($card_template) = join("", `cat $templatedir/thaicard.tex.in`);
 
 my($json) = JSON->new;
 my($cards) = $json->decode($json_text);
@@ -35,32 +50,35 @@ for ( @{$cards->{cards}} ) {
     $content =~ s/#RUSSIAN#/$russian/;
     $content =~ s/#TRANSCRIPT#/$transcript/;
     $content =~ s/#THAI#/$thai/;
+    $content =~ s/#FONTDIR#/$fontdir/g;
 
-    my($content_filename) = sprintf("content_%003d", $index);
-    open my $fh1, ">", "$content_filename.tex" or die("Could not open file. $!");
+    my($content_filename) = sprintf("$tmp/content_%003d", $index);
+    open my $fh1, ">", "$content_filename.tex" or die("Could not open file $content_filename.tex: $!");
     print $fh1 $content;
     close $fh1;
 
-    system("xelatex $content_filename.tex");
-    system("xelatex $content_filename.tex");
+    system("cd $tmp && xelatex $content_filename.tex");
+    system("cd $tmp && xelatex $content_filename.tex");
     system("rm $content_filename.tex");
     system("rm $content_filename.aux");
     system("rm $content_filename.log");
     system("rm $content_filename.out");
-    system("pdfcrop $content_filename.pdf");
+    system("cd $tmp && pdfcrop $content_filename.pdf");
     system("rm $content_filename.pdf");
 
     my($card) = $card_template;
     $card =~ s/#TOPIC#/$topic/;
     $card =~ s/#CONTENT#/$content_filename-crop.pdf/;
+    $card =~ s/#IMGDIR#/$imgdir/g;
+    $card =~ s/#FONTDIR#/$fontdir/g;
 
-    my($card_filename) = sprintf("thaicard_%003d", $index);
-    open my $fh2, ">", "$card_filename.tex" or die("Could not open file. $!");
+    my($card_filename) = sprintf("$tmp/thaicard_%003d", $index);
+    open my $fh2, ">", "$card_filename.tex" or die("Could not open file $card_filename.tex: $!");
     print $fh2 $card;
     close $fh2;
 
-    system("xelatex $card_filename.tex");
-    system("xelatex $card_filename.tex");
+    system("cd $tmp && xelatex $card_filename.tex");
+    system("cd $tmp && xelatex $card_filename.tex");
     system("rm $card_filename.tex");
     system("rm $card_filename.aux");
     system("rm $card_filename.log"); 

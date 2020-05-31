@@ -45,9 +45,9 @@
 \usepackage{polyglossia}
 \setdefaultlanguage{thai}
 \setotherlanguages{english,russian}
-\newfontfamily\footerfont[SizeFeatures={Size=30}]{Tahoma}
-\newfontfamily\cyrillicfont{Tahoma Bold}[Script=Cyrillic]
-\newfontfamily\thaifont{Sathu}[Script=Thai,Scale=MatchLowercase,WordSpace=1.25,Mapping=tex-text]
+\newfontfamily\footerfont[Path=#FONTDIR#/,SizeFeatures={Size=30}]{Tahoma}
+\newfontfamily\cyrillicfont{Tahoma Bold}[Path=#FONTDIR#/,Script=Cyrillic]
+\newfontfamily\thaifont{Sathu}[Path=#FONTDIR#/,Scale=MatchLowercase,WordSpace=1.25,Mapping=tex-text]
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \pagestyle{empty}
@@ -57,7 +57,7 @@
 %
 \begin{tikzpicture}[remember picture,overlay]
 \node[inner sep=0] at (current page.center)
-{\includegraphics[width=\paperwidth,height=\paperheight]{thaicard.png}};
+{\includegraphics[width=\paperwidth,height=\paperheight]{#IMGDIR#/thaicard.png}};
 \end{tikzpicture}
 \def\primarycolor{orange!99}
 \def\secondarycolor{black}
@@ -73,9 +73,9 @@
 %
 \begin{tikzpicture}[remember picture,overlay]
 \node[inner sep=0,yshift=-6.6in,anchor=west] at (current page.center)
-{\includegraphics[width=31pt]{facebook.png}};
+{\includegraphics[width=31pt]{#IMGDIR#/facebook.png}};
 \node[inner sep=0,yshift=-7.1in,anchor=west] at (current page.center)
-{\includegraphics[width=31pt]{instagram.png}};
+{\includegraphics[width=31pt]{#IMGDIR#/instagram.png}};
 \node[inner sep=36pt,yshift=-6.6in,anchor=west] at (current page.center)
 {\footerfont{\href{facebook.com/russianforthaisbyjibby}{facebook.com/russianforthaisbyjibby}}};
 \node[inner sep=36pt,yshift=-7.1in,anchor=west] at (current page.center)

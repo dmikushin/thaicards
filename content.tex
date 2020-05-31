@@ -1,17 +1,18 @@
 \documentclass[]{extarticle}
 \usepackage{xcolor}
+\usepackage{pagecolor}
 \usepackage[paperheight=30in,paperwidth=15in,margin=0.5in]{geometry}
 \usepackage{fontspec}
 \usepackage{polyglossia}
 \setdefaultlanguage{thai}
 \setotherlanguages{english,russian}
-\newfontfamily\cyrillicfont{Tahoma Bold}[Script=Cyrillic]
-\newfontfamily\thaifont{Sathu}[Script=Thai,Scale=MatchLowercase,WordSpace=1.25,Mapping=tex-text]
+\newfontfamily\cyrillicfont{Tahoma Bold}[Path=./fonts/,Script=Cyrillic]
+\newfontfamily\thaifont{Sathu}[Path=./fonts/,Script=Thai,Scale=MatchLowercase,WordSpace=1.25,Mapping=tex-text]
 \usepackage{xunicode}
 \usepackage{xltxtra}
 \pagestyle{empty}
 \begin{document}
-\nopagecolor
+\pagecolor{none}
 \hspace{0pt}
 \vfill
 \begin{center}
