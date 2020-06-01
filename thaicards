@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use lib qw(..);
-
+use Cwd;
 use JSON qw( );
 use File::Basename;
 
@@ -95,6 +95,13 @@ for ( @{$cards->{cards}} ) {
     system("rm $content_filename-crop.pdf");
 
     system("convert -quality 00 $card_filename.pdf $card_filename.png");
+
+    if (dirname(__FILE__) eq "/usr/bin")
+    {
+        my($pwd) = getcwd;
+        system("mv $card_filename.pdf $pwd/");
+        system("mv $card_filename.png $pwd/");
+    }
 
     $index++; 
 }
