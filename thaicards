@@ -67,7 +67,6 @@ for ( @{$cards->{cards}} ) {
     close $fh1;
 
     system("cd $tmp && xelatex $content_filename.tex");
-    system("cd $tmp && xelatex $content_filename.tex");
     system("rm $content_filename.tex");
     system("rm $content_filename.aux");
     system("rm $content_filename.log");
