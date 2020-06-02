@@ -3,7 +3,7 @@ Memory cards rendering system for Thai language learning.
 ## Prerequisites
 
 ```
-sudo apt git perl texlive-xetex libjson-perl imagemagick
+sudo apt install git perl texlive-xetex libjson-perl imagemagick
 ```
 
 In `/etc/ImageMagick-6/policy.xml`:
