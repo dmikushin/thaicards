@@ -40,7 +40,7 @@ my($json_text) = do {
 };
 
 my($content_template) = join("", `cat $templatedir/content.tex.in`);
-my($card_template) = join("", `cat $templatedir/thaicard.tex.in`);
+my($card_template) = join("", `cat $templatedir/thaicards.tex.in`);
 
 my($json) = JSON->new;
 my($cards) = $json->decode($json_text);
@@ -80,7 +80,7 @@ for ( @{$cards->{cards}} ) {
     $card =~ s/#IMGDIR#/$imgdir/g;
     $card =~ s/#FONTDIR#/$fontdir/g;
 
-    my($card_filename) = sprintf("$tmp/thaicard_%003d", $index);
+    my($card_filename) = sprintf("$tmp/thaicards_%003d", $index);
     open my $fh2, ">", "$card_filename.tex" or die("Could not open file $card_filename.tex: $!");
     print $fh2 $card;
     close $fh2;
